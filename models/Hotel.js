@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 
-
 const HotelSchema=new mongoose.Schema({
 name:{
     type:String,
@@ -49,5 +48,5 @@ featured:{
     type:Boolean,
     default:false
 }
-})
+},{timestamps:true})
 export default mongoose.model("Hotel",HotelSchema)
