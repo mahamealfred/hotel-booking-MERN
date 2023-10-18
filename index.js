@@ -20,7 +20,7 @@ dotenv.config()
 // mongoose.connection.on("disconected",()=>{
 //     console.log("MongoDB disconnected")
 // })
-const connectionString = process.env.MONGO;
+const connectionString = process.env.MONGO_DB;
 const dbConnect = async (next) => {
   const connect = await mongoose.connect(connectionString, {
     useNewUrlParser: true,
