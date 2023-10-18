@@ -9,18 +9,25 @@ import cookieParser from "cookie-parser";
 const app=express();
 dotenv.config()
 
-const connect=async()=>{
-    try {
-        await mongoose.connect(process.env.MONGO);
-        console.log("Connected to MongoDb.")
-      } catch (error) {
-        throw error;
-      }
-}
-mongoose.connection.on("disconected",()=>{
-    console.log("MongoDB disconnected")
-})
-
+// const connect=async()=>{
+//     try {
+//         await mongoose.connect(process.env.MONGO);
+//         console.log("Connected to MongoDb.")
+//       } catch (error) {
+//         throw error;
+//       }
+// }
+// mongoose.connection.on("disconected",()=>{
+//     console.log("MongoDB disconnected")
+// })
+const connectionString = process.env.MONGO;
+const dbConnect = async (next) => {
+  const connect = await mongoose.connect(connectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  console.log(`mongodb connected on: ${connect.connection.host}`);
+};
 
 //middleware
 app.use(cookieParser())
@@ -41,6 +48,6 @@ app.use((err,req,res,next)=>{
   })
 })
 app.listen(8000,()=>{
-    connect();
+   dbConnect();
     console.log("Connected to Backend");
 })
