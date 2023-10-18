@@ -49,5 +49,5 @@ app.use((err,req,res,next)=>{
 })
 app.listen(8000,()=>{
    dbConnect();
-    console.log("Connected to Backend");
+    console.log("Connected to Backend.");
 })
